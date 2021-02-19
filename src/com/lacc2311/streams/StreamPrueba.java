@@ -65,7 +65,15 @@ public class StreamPrueba {
 				.collect(Collectors.toList());
 		
 		nombresUnicaLista.stream().forEach( e -> System.out.println(e) );
-				
+		
+		//Peek es un método intermedio a diferencia de forEach que es un método final
+		System.out.println("======================== Peek ========================");
+		setUpUser();
+		
+		List<User> userPeek = users.stream()
+				.peek( e -> e.setNombre(e.getNombre() + " Peek") )
+				.collect(Collectors.toList());
+		userPeek.stream().forEach( e -> System.out.println(e.toString()) );
 		
 	}
 	
