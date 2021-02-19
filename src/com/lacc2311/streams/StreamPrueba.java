@@ -1,6 +1,7 @@
 package com.lacc2311.streams;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,7 +30,7 @@ public class StreamPrueba {
 		
 		//Filtramos todos los usaurios que no sean Anibal y el id sea menor a 3
 		List<User> usersFilter = users.stream()
-				.filter(e -> e.getNombre()!="Anibal")
+				.filter(e -> !e.getNombre().equals("Anibal"))
 				.filter(e -> e.getId() < 3)
 				.collect(Collectors.toList());
 		usersFilter.stream().forEach( e->System.out.println(e.toString()) );
@@ -45,6 +46,25 @@ public class StreamPrueba {
 				.orElse(null);
 		
 		System.out.println(user.toString());
+		
+		//flatMap
+		System.out.println("======================== Flat map ========================");
+		setUpUser(); //se recarga la lista original
+		
+		//Creamos una lista de listas
+		List<List<String>> nombresVariasListas = new ArrayList<List<String>>(
+				Arrays.asList(
+						new ArrayList<String>(Arrays.asList("Anibal", "Maria", "Pedro")),
+						new ArrayList<String>(Arrays.asList("Monica", "Pablo"))
+						)
+				);
+		
+		//Unimos todos los datos en una sóla lista
+		List<String> nombresUnicaLista = nombresVariasListas.stream()
+				.flatMap(e->e.stream())
+				.collect(Collectors.toList());
+		
+		nombresUnicaLista.stream().forEach( e -> System.out.println(e) );
 				
 		
 	}
