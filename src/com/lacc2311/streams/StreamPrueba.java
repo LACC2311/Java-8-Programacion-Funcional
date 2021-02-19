@@ -2,6 +2,7 @@ package com.lacc2311.streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StreamPrueba {
@@ -17,6 +18,10 @@ public class StreamPrueba {
 		
 		users.stream().forEach(e->e.setNombre(e.getNombre() + " Apellido"));
 		imprimirLista();
+		
+		// Se toma la lista de usuarios y se transforma en una lista de Strings utilizando map
+		List <String> lista = users.stream().map(e->e.getNombre()).collect(Collectors.toList());
+		lista.stream().forEach(e->System.out.println(e));
 		
 	}
 	
