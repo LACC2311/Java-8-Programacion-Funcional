@@ -6,7 +6,8 @@ public class OptionalPrueba {
 	
 	public static void main(String[] args) {
 //		probarOptional(null);
-		orElseOptional(null);
+//		orElseOptional(null);
+		orElseThrow(null);
 		
 	}
 	
@@ -28,12 +29,13 @@ public class OptionalPrueba {
 		// orElse: en caso de que el objeto sea nulo toma el valor por default
 		String nombreOfNullable = optional.orElse("default");
 		System.out.println(nombreOfNullable);
-		
-		// falla en caso de ser nulo
-//		Optional<String> optional1 = Optional.of(nombre);
-//		String nombreOf = optional1.orElse("default");
-//		System.out.println(nombreOf);
-		
+	}
+	
+	public static void orElseThrow(String nombre) {
+		Optional<String> optional = Optional.ofNullable(nombre);
+		optional.orElseThrow(NullPointerException::new);
+		String nombre1 = optional.get();
+		System.out.println(nombre1);
 	}
 
 }
