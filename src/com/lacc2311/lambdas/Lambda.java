@@ -1,6 +1,6 @@
 package com.lacc2311.lambdas;
 
-public class Lambda {
+public class Lambda implements PorDefecto {
 
 	public static void main(String[] args) {
 
@@ -55,6 +55,16 @@ public class Lambda {
 		
 		System.out.println(suma2.suma(5, 3));
 		
+//		Llamado a método por defecto (implementado dentro de la interface)
+		Lambda l = new Lambda();
+		System.out.println( l.nombrePorDefecto("Anibal") );
+		
+	}
+
+//	Función sin implementar en la interface
+	@Override
+	public void mostrarNombre(String nombre) {
+		// TODO Auto-generated method stub
 		
 	}
 
