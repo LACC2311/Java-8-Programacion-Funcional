@@ -25,7 +25,6 @@ public class StreamPrueba {
 		
 		//Filter
 		System.out.println("======================== Filters ========================");
-		
 		setUpUser(); //se recarga la lista original
 		
 		//Filtramos todos los usaurios que no sean Anibal y el id sea menor a 3
@@ -34,6 +33,19 @@ public class StreamPrueba {
 				.filter(e -> e.getId() < 3)
 				.collect(Collectors.toList());
 		usersFilter.stream().forEach( e->System.out.println(e.toString()) );
+		
+		//Find first
+		System.out.println("======================== Find first ========================");
+		setUpUser(); //se recarga la lista original
+		
+		//Obtiene el primer elemento que cumpla con el criterio, en caso de no encontrar alguno devuelve nulo
+		User user = users.stream()
+				.filter( e->e.getNombre().equals("Anibal") )
+				.findFirst()
+				.orElse(null);
+		
+		System.out.println(user.toString());
+				
 		
 	}
 	
