@@ -19,9 +19,21 @@ public class StreamPrueba {
 		users.stream().forEach(e->e.setNombre(e.getNombre() + " Apellido"));
 		imprimirLista();
 		
-		// Se toma la lista de usuarios y se transforma en una lista de Strings utilizando map
+		//Map y Collectors.toList
 		List <String> lista = users.stream().map(e->e.getNombre()).collect(Collectors.toList());
 		lista.stream().forEach(e->System.out.println(e));
+		
+		//Filter
+		System.out.println("======================== Filters ========================");
+		
+		setUpUser(); //se recarga la lista original
+		
+		//Filtramos todos los usaurios que no sean Anibal y el id sea menor a 3
+		List<User> usersFilter = users.stream()
+				.filter(e -> e.getNombre()!="Anibal")
+				.filter(e -> e.getId() < 3)
+				.collect(Collectors.toList());
+		usersFilter.stream().forEach( e->System.out.println(e.toString()) );
 		
 	}
 	
