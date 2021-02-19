@@ -68,6 +68,28 @@ public class ReferenciaMetodo {
 		// Method reference
 		users.forEach(User::mostrarNombre);
 		
+/*
+ * 		Referencia a un constructor
+ * 		Class::new
+ */
+		
+		// Clase anónima
+		IUser iUser = new IUser() {
+			@Override
+			public User crear(String nombre) {
+				return new User(nombre);
+			}
+		};
+		iUser.crear("Usuario Anonimo").mostrarNombre();
+			
+		// Lambda
+		IUser iUserL = (nombre -> new User(nombre));
+		iUserL.crear("Usuario Lambda").mostrarNombre();
+		
+		// Referencia a constructor
+		IUser iUserRC = User::new;
+		iUserRC.crear("Usuario Referencia").mostrarNombre();
+		
 
 	}
 
