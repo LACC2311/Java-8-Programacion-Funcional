@@ -30,6 +30,32 @@ public class Lambda {
 		
 		System.out.println(miNombreLambda.miNombre());
 		
+//		Clase anónima
+		Sumar suma = new Sumar() {
+			
+			@Override
+			public int suma(int a, int b) {
+				return a + b;
+			}
+		};
+		
+		System.out.println(suma.suma(5, 3));
+		
+//		Función lambda
+		Sumar suma1 = (a,b) -> a + b;
+		System.out.println(suma1.suma(5, 3));
+		
+//		Podemos escribir funcionalidad extra dentro del cuerpo dentro de { }
+		Sumar suma2 = (a,b) -> {
+			a = b * b;
+			a = a + b;
+			System.out.println("Mensaje dentro del lambda");
+			return a;
+		};
+		
+		System.out.println(suma2.suma(5, 3));
+		
+		
 	}
 
 }
