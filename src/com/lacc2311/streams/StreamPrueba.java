@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamPrueba {
@@ -142,6 +143,23 @@ public class StreamPrueba {
 		//Verifica si ningún elemento cumple con el predicado
 		boolean noneMatch = listaNumeros.stream().noneMatch(e -> e>10000);
 		System.out.println(noneMatch);
+		
+		//Sum Average Range
+		System.out.println("======================== Sum Average Range ========================");
+		setUpUser();
+		
+		double result = users.stream()
+				.mapToInt(User::getId)
+				.average() //nos da el promedio de la lista
+				.orElse(0);
+		System.out.println(result);
+		
+		result = users.stream()
+				.mapToInt(User::getId)
+				.sum(); //suma todos los elementos
+		System.out.println(result);
+		
+		System.out.println(IntStream.range(0, 100).sum()); //suma todos los enteros dentro del rango
 		
 	}
 	
