@@ -127,6 +127,21 @@ public class StreamPrueba {
 				.collect(Collectors.toList());
 		abcFilter1.stream().forEach(e -> System.out.println(e));
 		
+		//allMatch, anyMatch, noneMatch
+		System.out.println("======================== allMatch, anyMatch, noneMatch ========================");
+		List<Integer> listaNumeros = Arrays.asList(100,300,900,500);
+		
+		//Verifica si el prédicado es verdadero
+		boolean allMatch = listaNumeros.stream().allMatch(e -> e>301);
+		System.out.println(allMatch);
+		
+		//Verifica si almenos un valor del prédicado es verdadero
+		boolean anyMatch = listaNumeros.stream().anyMatch(e -> e>301);
+		System.out.println(anyMatch);
+		
+		//Verifica si ningún elemento cumple con el predicado
+		boolean noneMatch = listaNumeros.stream().noneMatch(e -> e>10000);
+		System.out.println(noneMatch);
 		
 	}
 	
