@@ -231,6 +231,16 @@ public class StreamPrueba {
 		System.out.println("Menor a 10");
 		esMayor.get(false).stream().forEach(e->System.out.println(e));
 		
+		//groupingBy
+		System.out.println("======================== groupingBy ========================");
+		setUpUser();
+		
+		Map<Character, List<User>> grupoAlfabetico = users.stream()
+				.collect(Collectors.groupingBy(e -> new Character(e.getNombre().charAt(0)))); //agrupamos por inicial
+		
+		grupoAlfabetico.get('A').forEach(e -> System.out.println(e.getNombre()));
+		grupoAlfabetico.get('M').forEach(e -> System.out.println(e.getNombre()));
+		grupoAlfabetico.get('P').forEach(e -> System.out.println(e.getNombre()));
 		
 		
 	}
