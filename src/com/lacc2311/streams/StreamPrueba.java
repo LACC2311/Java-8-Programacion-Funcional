@@ -2,6 +2,7 @@ package com.lacc2311.streams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -94,6 +95,17 @@ public class StreamPrueba {
 				.collect(Collectors.toList());
 		
 		abcFilter.stream().forEach(e->System.out.println(e));
+		
+		//Sorted
+		System.out.println("======================== Sorted ========================");
+		setUpUser();
+		
+		users = users.stream()
+				.sorted(Comparator.comparing(User::getNombre))//Usamos la referencia a método
+				.collect(Collectors.toList());
+		imprimirLista();
+		
+		
 	}
 	
 	private static void setUpUser() {
