@@ -105,6 +105,20 @@ public class StreamPrueba {
 				.collect(Collectors.toList());
 		imprimirLista();
 		
+		//Min y Max
+		System.out.println("======================== Min y Max ========================");
+		setUpUser();
+		
+		User userMin = users.stream()
+				.min(Comparator.comparing(User::getId))
+				.orElse(null);
+		System.out.println(userMin.getId());
+		
+		User userMax = users.stream()
+				.max(Comparator.comparing(User::getId))
+				.orElse(null);
+		System.out.println(userMax.getId());
+		
 		
 	}
 	
