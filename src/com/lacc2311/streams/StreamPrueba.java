@@ -251,6 +251,27 @@ public class StreamPrueba {
 		
 		personas.stream().forEach(e -> System.out.println(e));
 		
+		//Stream paralelo
+		System.out.println("======================== Stream paralelo ========================");
+		setUpUser();
+		
+		long tiempoStream = System.currentTimeMillis();
+		lista.stream().forEach(e -> convertirAMayusculas(e));
+		System.out.println("Normal: " + (System.currentTimeMillis()-tiempoStream) );
+		
+		long tiempoStreamParalelo = System.currentTimeMillis();
+		lista.parallelStream().forEach(e -> convertirAMayusculas(e));
+		System.out.println("Paralelo: " + ( System.currentTimeMillis()-tiempoStreamParalelo) );
+		
+	}
+	
+	private static String convertirAMayusculas(String nombre) {
+		try {
+			Thread.sleep(1000);
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		return nombre.toUpperCase();
 	}
 	
 	private static void setUpUser() {
