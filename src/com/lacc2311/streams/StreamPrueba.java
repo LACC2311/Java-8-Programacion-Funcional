@@ -22,12 +22,15 @@ public class StreamPrueba {
 		Stream stream = Stream.of(users);
 		users.stream();
 		
-		users.stream().forEach(e->e.setNombre(e.getNombre() + " Apellido"));
+		//Recorremos el collection y agregamos el Apellido
+		users.stream().forEach(e ->
+			e.setNombre(e.getNombre().concat(" Apellido"))
+		);
 		imprimirLista();
 		
 		//Map y Collectors.toList
-		List <String> lista = users.stream().map(e->e.getNombre()).collect(Collectors.toList());
-		lista.stream().forEach(e->System.out.println(e));
+		List <String> lista = users.stream().map(e -> e.getNombre()).collect(Collectors.toList());
+		lista.stream().forEach(e -> System.out.println(e));
 		
 		//Filter
 		System.out.println("======================== Filters ========================");
@@ -35,58 +38,56 @@ public class StreamPrueba {
 		
 		//Filtramos todos los usaurios que no sean Anibal y el id sea menor a 3
 		List<User> usersFilter = users.stream()
-				.filter(e -> !e.getNombre().equals("Anibal"))
-				.filter(e -> e.getId() < 3)
-				.collect(Collectors.toList());
+			.filter(e -> !e.getNombre().equals("Anibal"))
+			.filter(e -> e.getId() < 3)
+			.collect(Collectors.toList());
 		usersFilter.stream().forEach( e->System.out.println(e.toString()) );
 		
 		//Find first
 		System.out.println("======================== Find first ========================");
-		setUpUser(); //se recarga la lista original
+		setUpUser();
 		
 		//Obtiene el primer elemento que cumpla con el criterio, en caso de no encontrar alguno devuelve nulo
 		User user = users.stream()
-				.filter( e->e.getNombre().equals("Anibal") )
-				.findFirst()
-				.orElse(null);
-		
+			.filter(e -> e.getNombre().equals("Anibal"))
+			.findFirst()
+			.orElse(null);
 		System.out.println(user.toString());
 		
 		//flatMap
 		System.out.println("======================== Flat map ========================");
-		setUpUser(); //se recarga la lista original
+		setUpUser();
 		
 		//Creamos una lista de listas
 		List<List<String>> nombresVariasListas = new ArrayList<List<String>>(
-				Arrays.asList(
-						new ArrayList<String>(Arrays.asList("Anibal", "Maria", "Pedro")),
-						new ArrayList<String>(Arrays.asList("Monica", "Pablo"))
-						)
-				);
+			Arrays.asList(
+				new ArrayList<String>(Arrays.asList("Anibal", "Maria", "Pedro")),
+				new ArrayList<String>(Arrays.asList("Monica", "Pablo"))
+			)
+		);
 		
 		//Unimos todos los datos en una sóla lista
 		List<String> nombresUnicaLista = nombresVariasListas.stream()
-				.flatMap(e->e.stream())
-				.collect(Collectors.toList());
-		
-		nombresUnicaLista.stream().forEach( e -> System.out.println(e) );
+			.flatMap(e -> e.stream())
+			.collect(Collectors.toList());
+		nombresUnicaLista.stream().forEach(e -> System.out.println(e));
 		
 		//Peek es un método intermedio a diferencia de forEach que es un método final
 		System.out.println("======================== Peek ========================");
 		setUpUser();
 		
 		List<User> userPeek = users.stream()
-				.peek( e -> e.setNombre(e.getNombre() + " Peek") )
-				.collect(Collectors.toList());
-		userPeek.stream().forEach( e -> System.out.println(e.toString()) );
+			.peek(e -> e.setNombre(e.getNombre().concat(" Peek")))
+			.collect(Collectors.toList());
+		userPeek.stream().forEach(e -> System.out.println(e.toString()));
 		
 		//Count
 		System.out.println("======================== Count ========================");
 		setUpUser();
 		
 		long numeroFiltrado = users.stream()
-				.filter(e -> e.getId()<3)
-				.count();
+			.filter(e -> e.getId()<3)
+			.count();
 		System.out.println(numeroFiltrado);
 		
 		//Skip y Limit
@@ -94,19 +95,18 @@ public class StreamPrueba {
 		String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};
 		
 		List<String> abcFilter = Arrays.stream(abc)
-				.skip(2) //omitimos los 2 primeros elementos
-				.limit(4) //limitamos la lista a 4 elementos
-				.collect(Collectors.toList());
-		
-		abcFilter.stream().forEach(e->System.out.println(e));
+			.skip(2) //omitimos los 2 primeros elementos
+			.limit(4) //limitamos la lista a 4 elementos
+			.collect(Collectors.toList());	
+		abcFilter.stream().forEach(e -> System.out.println(e));
 		
 		//Sorted
 		System.out.println("======================== Sorted ========================");
 		setUpUser();
 		
 		users = users.stream()
-				.sorted(Comparator.comparing(User::getNombre))//Usamos la referencia a método
-				.collect(Collectors.toList());
+			.sorted(Comparator.comparing(User::getNombre))//Usamos la referencia a método
+			.collect(Collectors.toList());
 		imprimirLista();
 		
 		//Min y Max
@@ -114,21 +114,22 @@ public class StreamPrueba {
 		setUpUser();
 		
 		User userMin = users.stream()
-				.min(Comparator.comparing(User::getId))
-				.orElse(null);
+			.min(Comparator.comparing(User::getId))
+			.orElse(null);
 		System.out.println(userMin.getId());
 		
 		User userMax = users.stream()
-				.max(Comparator.comparing(User::getId))
-				.orElse(null);
+			.max(Comparator.comparing(User::getId))
+			.orElse(null);
 		System.out.println(userMax.getId());
 		
 		//Distinct
 		System.out.println("======================== Distinct ========================");
 		String[] abc1 = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "a", "c"};
+		
 		List<String> abcFilter1 = Arrays.stream(abc1)
-				.distinct() //elimina elementos repetidos
-				.collect(Collectors.toList());
+			.distinct() //elimina elementos repetidos
+			.collect(Collectors.toList());
 		abcFilter1.stream().forEach(e -> System.out.println(e));
 		
 		//allMatch, anyMatch, noneMatch
@@ -136,15 +137,15 @@ public class StreamPrueba {
 		List<Integer> listaNumeros = Arrays.asList(100,300,900,500);
 		
 		//Verifica si el prédicado es verdadero
-		boolean allMatch = listaNumeros.stream().allMatch(e -> e>301);
+		boolean allMatch = listaNumeros.stream().allMatch(e -> e > 301);
 		System.out.println(allMatch);
 		
 		//Verifica si almenos un valor del prédicado es verdadero
-		boolean anyMatch = listaNumeros.stream().anyMatch(e -> e>301);
+		boolean anyMatch = listaNumeros.stream().anyMatch(e -> e > 301);
 		System.out.println(anyMatch);
 		
 		//Verifica si ningún elemento cumple con el predicado
-		boolean noneMatch = listaNumeros.stream().noneMatch(e -> e>10000);
+		boolean noneMatch = listaNumeros.stream().noneMatch(e -> e > 10000);
 		System.out.println(noneMatch);
 		
 		//Sum Average Range
@@ -152,14 +153,14 @@ public class StreamPrueba {
 		setUpUser();
 		
 		double result = users.stream()
-				.mapToInt(User::getId)
-				.average() //nos da el promedio de la lista
-				.orElse(0);
+			.mapToInt(User::getId)
+			.average() //nos da el promedio de la lista
+			.orElse(0);
 		System.out.println(result);
 		
 		result = users.stream()
-				.mapToInt(User::getId)
-				.sum(); //suma todos los elementos
+			.mapToInt(User::getId)
+			.sum(); //suma todos los elementos
 		System.out.println(result);
 		
 		System.out.println(IntStream.range(0, 100).sum()); //suma todos los enteros dentro del rango
@@ -169,8 +170,8 @@ public class StreamPrueba {
 		setUpUser();
 		
 		int numero = users.stream()
-				.map(User::getId)
-				.reduce(100, Integer::sum); //comienza desde 100 y realiza la sumatoria
+			.map(User::getId)
+			.reduce(100, Integer::sum); //comienza desde 100 y realiza la sumatoria
 		System.out.println(numero);
 		
 		//Joining
@@ -178,9 +179,9 @@ public class StreamPrueba {
 		setUpUser();
 		
 		String names = users.stream()
-				.map(User::getNombre)
-				.collect(Collectors.joining(" - ")) //concatena los nombres separados por un guion medio
-				.toString();
+			.map(User::getNombre)
+			.collect(Collectors.joining(" - ")) //concatena los nombres separados por un guion medio
+			.toString();
 		System.out.println(names);
 		
 		//toSet
@@ -189,16 +190,15 @@ public class StreamPrueba {
 		
 		//Acumula los elementos de entrada, no garantiza que el orden de elementos sea el mismo que de entrada, garantiza que no habrá elementos repetidos
 		Set<String> setNames = users.stream()
-				.map(User::getNombre)
-				.collect(Collectors.toSet());
+			.map(User::getNombre)
+			.collect(Collectors.toSet());
 		setNames.stream().forEach(e -> System.out.println(e));
 		
 		//summarizingDouble
 		System.out.println("======================== summarizingDouble ========================");
 		setUpUser();
 		
-		DoubleSummaryStatistics statistics = users.stream()
-				.collect(Collectors.summarizingDouble(User::getId));
+		DoubleSummaryStatistics statistics = users.stream().collect(Collectors.summarizingDouble(User::getId));
 		
 		System.out.println(statistics.getAverage());	//Promedio
 		System.out.println(statistics.getMax());		//Máximo
@@ -208,8 +208,8 @@ public class StreamPrueba {
 		
 		//Alternativa para obtener summaryStatistics
 		DoubleSummaryStatistics statistics1 = users.stream()
-				.mapToDouble(User::getId)
-				.summaryStatistics();
+			.mapToDouble(User::getId)
+			.summaryStatistics();
 		
 		System.out.println(statistics1.getAverage());	//Promedio
 		System.out.println(statistics1.getMax());		//Máximo
@@ -219,11 +219,10 @@ public class StreamPrueba {
 		
 		//partitioningBy
 		System.out.println("======================== partitioningBy ========================");
-		setUpUser();
+		List<Integer> numeros = Arrays.asList(5, 7, 34, 56, 2, 3, 67, 4, 98);
 		
-		List<Integer> numeros = Arrays.asList(5,7,34,56,2,3,67,4,98);
-		Map<Boolean, List<Integer>> esMayor = numeros.stream()
-				.collect(Collectors.partitioningBy(e -> e>10)); //divide la lista en 2 de acuerdo al predicado
+		//divide la lista en 2 de acuerdo al predicado
+		Map<Boolean, List<Integer>> esMayor = numeros.stream().collect(Collectors.partitioningBy(e -> e > 10));
 		
 		System.out.println("Mayor a 10");
 		esMayor.get(true).stream().forEach(e->System.out.println(e));
@@ -235,8 +234,9 @@ public class StreamPrueba {
 		System.out.println("======================== groupingBy ========================");
 		setUpUser();
 		
+		//agrupamos por inicial
 		Map<Character, List<User>> grupoAlfabetico = users.stream()
-				.collect(Collectors.groupingBy(e -> new Character(e.getNombre().charAt(0)))); //agrupamos por inicial
+			.collect(Collectors.groupingBy(e -> new Character(e.getNombre().charAt(0))));
 		
 		grupoAlfabetico.get('A').forEach(e -> System.out.println(e.getNombre()));
 		grupoAlfabetico.get('M').forEach(e -> System.out.println(e.getNombre()));
@@ -246,9 +246,8 @@ public class StreamPrueba {
 		System.out.println("======================== mapping ========================");
 		setUpUser();
 		
-		List<String> personas = users.stream()
-				.collect(Collectors.mapping(User::getNombre, Collectors.toList())); //el nombre de cada usuario se coloca en una lista
-		
+		//el nombre de cada usuario se coloca en una lista
+		List<String> personas = users.stream().collect(Collectors.mapping(User::getNombre, Collectors.toList()));
 		personas.stream().forEach(e -> System.out.println(e));
 		
 		//Stream paralelo
@@ -257,11 +256,11 @@ public class StreamPrueba {
 		
 		long tiempoStream = System.currentTimeMillis();
 		lista.stream().forEach(e -> convertirAMayusculas(e));
-		System.out.println("Normal: " + (System.currentTimeMillis()-tiempoStream) );
+		System.out.println("Normal: ".concat(Long.valueOf(System.currentTimeMillis()-tiempoStream).toString()));
 		
 		long tiempoStreamParalelo = System.currentTimeMillis();
 		lista.parallelStream().forEach(e -> convertirAMayusculas(e));
-		System.out.println("Paralelo: " + ( System.currentTimeMillis()-tiempoStreamParalelo) );
+		System.out.println("Paralelo: ".concat(Long.valueOf(System.currentTimeMillis()-tiempoStreamParalelo).toString()));
 		
 	}
 	
@@ -273,7 +272,7 @@ public class StreamPrueba {
 		}
 		return nombre.toUpperCase();
 	}
-	
+
 	private static void setUpUser() {
 		users = new ArrayList<>();
 		users.add(new User(1,"Anibal"));
@@ -285,7 +284,7 @@ public class StreamPrueba {
 	}
 	
 	private static void imprimirLista() {
-		users.stream().forEach( e -> System.out.println(e.toString()) );
+		users.stream().forEach(e -> System.out.println(e.toString()));
 	}
 
 }
