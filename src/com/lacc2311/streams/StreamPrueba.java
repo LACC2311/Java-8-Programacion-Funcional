@@ -242,6 +242,14 @@ public class StreamPrueba {
 		grupoAlfabetico.get('M').forEach(e -> System.out.println(e.getNombre()));
 		grupoAlfabetico.get('P').forEach(e -> System.out.println(e.getNombre()));
 		
+		//mapping
+		System.out.println("======================== mapping ========================");
+		setUpUser();
+		
+		List<String> personas = users.stream()
+				.collect(Collectors.mapping(User::getNombre, Collectors.toList())); //el nombre de cada usuario se coloca en una lista
+		
+		personas.stream().forEach(e -> System.out.println(e));
 		
 	}
 	
