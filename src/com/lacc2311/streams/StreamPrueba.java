@@ -161,6 +161,16 @@ public class StreamPrueba {
 		
 		System.out.println(IntStream.range(0, 100).sum()); //suma todos los enteros dentro del rango
 		
+		//Reduce
+		System.out.println("======================== Reduce ========================");
+		setUpUser();
+		
+		int numero = users.stream()
+				.map(User::getId)
+				.reduce(100, Integer::sum); //comienza desde 100 y realiza la sumatoria
+		System.out.println(numero);
+		
+		
 	}
 	
 	private static void setUpUser() {
