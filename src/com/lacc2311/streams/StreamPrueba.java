@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -215,6 +216,22 @@ public class StreamPrueba {
 		System.out.println(statistics1.getMin());		//Mínimo
 		System.out.println(statistics1.getCount());		//Número de elementos
 		System.out.println(statistics1.getSum());		//Suma	
+		
+		//partitioningBy
+		System.out.println("======================== partitioningBy ========================");
+		setUpUser();
+		
+		List<Integer> numeros = Arrays.asList(5,7,34,56,2,3,67,4,98);
+		Map<Boolean, List<Integer>> esMayor = numeros.stream()
+				.collect(Collectors.partitioningBy(e -> e>10)); //divide la lista en 2 de acuerdo al predicado
+		
+		System.out.println("Mayor a 10");
+		esMayor.get(true).stream().forEach(e->System.out.println(e));
+		
+		System.out.println("Menor a 10");
+		esMayor.get(false).stream().forEach(e->System.out.println(e));
+		
+		
 		
 	}
 	
