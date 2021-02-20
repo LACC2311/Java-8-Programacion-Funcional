@@ -75,6 +75,15 @@ public class StreamPrueba {
 				.collect(Collectors.toList());
 		userPeek.stream().forEach( e -> System.out.println(e.toString()) );
 		
+		//Count
+		System.out.println("======================== Count ========================");
+		setUpUser();
+		
+		long numeroFiltrado = users.stream()
+				.filter(e -> e.getId()<3)
+				.count();
+		System.out.println(numeroFiltrado);
+		
 	}
 	
 	private static void setUpUser() {
