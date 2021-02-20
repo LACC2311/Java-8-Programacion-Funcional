@@ -170,6 +170,15 @@ public class StreamPrueba {
 				.reduce(100, Integer::sum); //comienza desde 100 y realiza la sumatoria
 		System.out.println(numero);
 		
+		//Joining
+		System.out.println("======================== Joining ========================");
+		setUpUser();
+		
+		String names = users.stream()
+				.map(User::getNombre)
+				.collect(Collectors.joining(" - ")) //concatena los nombres separados por un guion medio
+				.toString();
+		System.out.println(names);
 		
 	}
 	
