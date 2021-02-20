@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -179,6 +180,16 @@ public class StreamPrueba {
 				.collect(Collectors.joining(" - ")) //concatena los nombres separados por un guion medio
 				.toString();
 		System.out.println(names);
+		
+		//toSet
+		System.out.println("======================== toSet ========================");
+		setUpUser();
+		
+		//Acumula los elementos de entrada, no garantiza que el orden de elementos sea el mismo que de entrada, garantiza que no habrá elementos repetidos
+		Set<String> setNames = users.stream()
+				.map(User::getNombre)
+				.collect(Collectors.toSet());
+		setNames.stream().forEach(e -> System.out.println(e));
 		
 	}
 	
