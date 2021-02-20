@@ -3,6 +3,7 @@ package com.lacc2311.streams;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -190,6 +191,30 @@ public class StreamPrueba {
 				.map(User::getNombre)
 				.collect(Collectors.toSet());
 		setNames.stream().forEach(e -> System.out.println(e));
+		
+		//summarizingDouble
+		System.out.println("======================== summarizingDouble ========================");
+		setUpUser();
+		
+		DoubleSummaryStatistics statistics = users.stream()
+				.collect(Collectors.summarizingDouble(User::getId));
+		
+		System.out.println(statistics.getAverage());	//Promedio
+		System.out.println(statistics.getMax());		//Máximo
+		System.out.println(statistics.getMin());		//Mínimo
+		System.out.println(statistics.getCount());		//Número de elementos
+		System.out.println(statistics.getSum());		//Suma	
+		
+		//Alternativa para obtener summaryStatistics
+		DoubleSummaryStatistics statistics1 = users.stream()
+				.mapToDouble(User::getId)
+				.summaryStatistics();
+		
+		System.out.println(statistics1.getAverage());	//Promedio
+		System.out.println(statistics1.getMax());		//Máximo
+		System.out.println(statistics1.getMin());		//Mínimo
+		System.out.println(statistics1.getCount());		//Número de elementos
+		System.out.println(statistics1.getSum());		//Suma	
 		
 	}
 	
