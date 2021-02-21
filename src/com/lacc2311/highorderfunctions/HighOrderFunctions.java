@@ -39,10 +39,9 @@ public class HighOrderFunctions implements SumarInterfaz {
 		//Interface BiFunction<T, U, R>, Interface Predicate<T>
 		List<Integer> numeros = Arrays.asList(6, 23, -5, 4, 68, -9, -67, 46);
 		BiFunction<List<Integer>, Predicate<Integer>, List<Integer>> filtrar;
-		filtrar = (lista, predicado) ->	
-			lista.stream()
-				.filter(e -> predicado.test(e))
-				.collect(Collectors.toList());
+		filtrar = (lista, predicado) ->	lista.stream()
+			.filter(e -> predicado.test(e))
+			.collect(Collectors.toList());
 		System.out.println(filtrar.apply(numeros, e -> e > 0));
 		
 		//Interface Consumer<T>
