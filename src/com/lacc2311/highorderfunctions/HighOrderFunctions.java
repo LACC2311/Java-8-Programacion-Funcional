@@ -3,6 +3,7 @@ package com.lacc2311.highorderfunctions;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class HighOrderFunctions implements SumarInterfaz {
 		SumarInterfaz sumarIntLambda = (a, b) -> a + b;
 		System.out.println(hof.sumaHighOrderFun(sumarIntLambda, 2, 6));
 		
-		//Interface funcional Function<T, R>
+		//Interface Function<T, R>
 		Function<String, String> convertirMayusculas = e -> e.toUpperCase();
 		hof.imprimirMayusculas(convertirMayusculas, "anibal");
 		
@@ -43,6 +44,10 @@ public class HighOrderFunctions implements SumarInterfaz {
 				.filter(e -> predicado.test(e))
 				.collect(Collectors.toList());
 		System.out.println(filtrar.apply(numeros, e -> e > 0));
+		
+		//Interface Consumer<T>
+		List<String> nombres = Arrays.asList("Anibal", "Maria", "Paco");
+		hof.filtrar(nombres, e -> System.out.println(e), 6);
 		
 	}
 	
@@ -63,6 +68,14 @@ public class HighOrderFunctions implements SumarInterfaz {
 	//Function<Parametro de entrada, Retorno de la función>
 	public void imprimirMayusculas(Function<String, String> function, String nombre) {
 		System.out.println(function.apply(nombre));
+	}
+	
+	public void filtrar(List<String> lista, Consumer<String> consumer, int maximoCaracteres) {
+		lista.stream().filter(logicaPredicado(maximoCaracteres)).forEach(consumer);
+	}
+	
+	public Predicate<String> logicaPredicado(int maximoCaracteres){
+		return e -> e.length() < maximoCaracteres;
 	}
 	
 }
