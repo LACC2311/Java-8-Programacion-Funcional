@@ -20,6 +20,10 @@ public class HighOrderFunctions implements SumarInterfaz {
 		};
 		System.out.println(hof.sumaHighOrderFun(sumarInterfaz, 2, 5));
 		
+		//Versió mejorada con lambda
+		SumarInterfaz sumarIntLambda = (a,b) -> a + b;
+		System.out.println(hof.sumaHighOrderFun(sumarIntLambda, 2, 5));
+		
 	}
 	
 	public int suma(int a, int b) {
